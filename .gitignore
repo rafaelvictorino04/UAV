@@ -1,0 +1,16 @@
+# Dados pessoais — não publicar
+certificados/*
+!certificados/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Logs de simulação
+*.tlog
+*.tlog.raw
+logs/
+
+# macOS
+.DS_Store
