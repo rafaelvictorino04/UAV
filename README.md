@@ -13,7 +13,7 @@ UAV/
 └── recursos/        ← artigos, PDFs, links
 ```
 
-O ArduPilot fica em `~/ardupilot` (é uma ferramenta, não faz parte deste repositório).
+O ArduPilot fica em `~/UAV/ferramentas/ardupilot` (é uma ferramenta, não faz parte deste repositório).
 
 ## Estado
 
@@ -51,7 +51,7 @@ O ArduPilot fica em `~/ardupilot` (é uma ferramenta, não faz parte deste repos
 
 | O quê | Onde / como |
 |---|---|
-| ArduPilot SITL | `cd ~/ardupilot && Tools/autotest/sim_vehicle.py -v ArduCopter` |
+| ArduPilot SITL | `cd ~/UAV/ferramentas/ardupilot && Tools/autotest/sim_vehicle.py -v ArduCopter --out 127.0.0.1:14551` |
 | QGroundControl | liga-se sozinho por UDP 14550 |
 | Scripts (pymavlink) | `udpin:127.0.0.1:14551` |
 

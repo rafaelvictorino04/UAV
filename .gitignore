@@ -14,3 +14,7 @@ logs/
 
 # macOS
 .DS_Store
+
+# Ferramentas externas (ArduPilot, etc.)
+ferramentas/
+*.pcapng

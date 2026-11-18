@@ -6,8 +6,8 @@ Script em Python (pymavlink) que liga ao ArduPilot SITL, descola até 10 m, voa 
 
 1. Arrancar o simulador:
    ```bash
-   cd ~/ardupilot
-   Tools/autotest/sim_vehicle.py -v ArduCopter
+   cd ~/UAV/ferramentas/ardupilot
+   Tools/autotest/sim_vehicle.py -v ArduCopter --out 127.0.0.1:14551
    ```
 2. Abrir o QGroundControl para ver o voo no mapa.
 3. Noutro terminal:

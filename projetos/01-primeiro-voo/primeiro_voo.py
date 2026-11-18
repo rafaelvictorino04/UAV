@@ -13,7 +13,7 @@ from pymavlink import mavutil
 ALT = 10    # altura de voo (m)
 LADO = 20   # lado do quadrado (m)
 
-# O sim_vehicle.py envia MAVLink para 14550 (QGroundControl) e 14551 (scripts)
+# Arranca o SITL com: sim_vehicle.py -v ArduCopter --out 127.0.0.1:14551
 m = mavutil.mavlink_connection("udpin:127.0.0.1:14551")
 m.wait_heartbeat()
 print(f"Ligado ao sistema {m.target_system}, componente {m.target_component}")
@@ -36,11 +36,14 @@ def modo(nome):
 def armar():
     for _ in range(30):
         m.arducopter_arm()
-        time.sleep(2)
-        m.recv_match(type="HEARTBEAT", blocking=True)
-        if m.motors_armed():
-            print("Motores armados")
-            return
+        # Lê os HEARTBEAT dos 2 s seguintes (ignora os antigos que estejam na fila)
+        fim = time.time() + 2
+        while time.time() < fim:
+            hb = m.recv_match(type="HEARTBEAT", blocking=True, timeout=0.5)
+            if (hb and hb.get_srcSystem() == m.target_system
+                    and hb.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED):
+                print("Motores armados")
+                return
         print("À espera do GPS/EKF para poder armar...")
     raise SystemExit("Não foi possível armar. Verifica as mensagens PreArm no SITL.")
 
