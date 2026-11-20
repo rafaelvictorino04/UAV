@@ -18,3 +18,6 @@ logs/
 # Ferramentas externas (ArduPilot, etc.)
 ferramentas/
 *.pcapng
+
+# Testes rápidos
+projetos/*/exercicios/teste_*.py

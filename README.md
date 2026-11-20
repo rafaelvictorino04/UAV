@@ -1,69 +1,34 @@
-# UAV — Aprendizagem
+# UAV
 
-Objetivo: especializar-me em UAVs inteligentes, com foco em **comunicações e segurança**.
+Repositório onde registo o que vou aprendendo sobre drones, com foco nas comunicações e na segurança dos links entre o drone e a estação de solo.
 
-## Estrutura
+Sou aluno do Mestrado em Engenharia de Telecomunicações e Informática (Iscte), na especialização em Cibersegurança. Venho das redes (IPsec, MPLS, FortiGate, automação com n8n) e estou a aplicar essa base aos UAVs. Tenho o certificado de piloto A1/A3 (ANAC/EASA).
 
-```
-UAV/
-├── README.md        ← roteiro e estado (este ficheiro)
-├── certificados/    ← certificado A1/A3 e futuros (fora do Git)
-├── notas/           ← apontamentos (ex.: regras-A1-A3.md)
-├── projetos/        ← um projeto por pasta (01-, 02-, ...)
-└── recursos/        ← artigos, PDFs, links
-```
+## Projetos
 
-O ArduPilot fica em `~/UAV/ferramentas/ardupilot` (é uma ferramenta, não faz parte deste repositório).
-
-## Estado
-
-- [x] Certificado A1/A3 ANAC/EASA — obtido a 18/11/2026, válido até 18/11/2031
-- [ ] Registo de operador em uas.anac.pt (quando tiver drone real com câmara ou > 250 g)
-- [ ] ArduPilot SITL + QGroundControl a funcionar no Mac
-- [ ] Projeto 01 — primeiro voo autónomo
-
-## Roteiro
-
-### Fase 1 — Como um drone voa
-- Conceitos: dinâmica de multirotor, PID, IMU/GPS/barómetro/magnetómetro, EKF, modos de voo
-- Ferramentas: ArduPilot, PX4, MAVLink, QGroundControl
-- [ ] Projeto 01: voo autónomo com pymavlink (`projetos/01-primeiro-voo`)
-- [ ] Capturar o tráfego MAVLink no Wireshark (loopback, `udp.port == 14551`)
-
-### Fase 2 — Comunicações
-- Conceitos: link C2, telemetria e vídeo, link budget, propagação ar-solo, drones em LTE/5G (3GPP), FANETs, drone como estação base
-- Ferramentas: mavlink-router, ns-3 ou OMNeT++, SDR (RTL-SDR/HackRF) + GNU Radio
-- [ ] Projeto 02: telemetria por túnel IPsec/WireGuard, medir latência e perda, testar o failsafe
-
-### Fase 3 — Segurança de UAV
-- Ameaças: GPS spoofing, jamming, MAVLink sem autenticação, falsificação de Remote ID, deteção RF (counter-UAS)
-- [ ] Projeto 03: GCS intrusa no SITL e mitigação com assinatura MAVLink 2
-- ⚠️ Jamming e spoofing de RF real são ilegais — só em simulação ou laboratório controlado
-
-### Fase 4 — Autonomia
-- ROS 2 (PX4 via uXRCE-DDS), OpenCV/YOLO, planeamento (A*, RRT), SLAM, enxames
-- [ ] Projeto 04: drone no Gazebo que deteta e segue um alvo com a câmara
-
-### Fase 5 — Hardware
-- Kit com controladora tipo Pixhawk (PX4/ArduPilot) ou drone < 250 g para começar
+| # | Projeto | Estado |
+|---|---|---|
+| 01 | [Primeiro voo autónomo e análise do tráfego MAVLink](projetos/01-primeiro-voo) | concluído |
+| 02 | Telemetria MAVLink por VPN (IPsec/WireGuard), com latência e perda simuladas | a seguir |
+| 03 | Estação de solo intrusa no SITL e mitigação com assinatura MAVLink 2 | planeado |
 
 ## Ambiente
 
-| O quê | Onde / como |
-|---|---|
-| ArduPilot SITL | `cd ~/UAV/ferramentas/ardupilot && Tools/autotest/sim_vehicle.py -v ArduCopter --out 127.0.0.1:14551` |
-| QGroundControl | liga-se sozinho por UDP 14550 |
-| Scripts (pymavlink) | `udpin:127.0.0.1:14551` |
+Tudo corre em simulação, no macOS:
 
-## Recursos
+- ArduPilot SITL (ArduCopter), MAVProxy e QGroundControl
+- Python 3.10 com pymavlink
+- Wireshark com o dissector MAVLink gerado pelo `mavgen`
 
-- Documentação: docs.px4.io, ardupilot.org/dev, mavlink.io
-- Zeng, Wu, Zhang — *Accessing From the Sky: A Tutorial on UAV Communications for 5G and Beyond* (Proc. IEEE, 2019)
-- Beard & McLain — *Small Unmanned Aircraft: Theory and Practice*
-- Curso *Aerial Robotics* (UPenn, Coursera)
-- Comunidade: discuss.ardupilot.org, discuss.px4.io
+Os passos para arrancar o simulador estão em [notas/como-arrancar.md](notas/como-arrancar.md).
 
-## Ecossistema em Portugal
+## Notas
 
-- **IT-Iscte, Grupo de Sistemas de Rádio** (Nuno Souto, Pedro Sebastião) — dissertações em jamming, spoofing GPS e deteção de UAVs com SDR → tema de dissertação
-- **Empresas:** Tekever, Beyond Vision (Alverca), UAVision, CEiiA
+- [Como arrancar o ambiente](notas/como-arrancar.md)
+- [Resumo das regras da categoria aberta (A1/A3)](notas/regras-A1-A3.md)
+
+## Próximos passos
+
+- Pôr a telemetria a passar por uma VPN entre duas máquinas e medir o efeito de latência tipo satélite (~600 ms) no failsafe.
+- Mostrar no SITL que é possível enviar comandos ao drone a partir de outra estação de solo e testar a assinatura de mensagens do MAVLink 2.
+- Mais tarde: ROS 2, visão por computador e hardware real (controladora Pixhawk).

@@ -1,4 +1,4 @@
-# Regras da categoria aberta (A1/A3) — resumo
+# Regras da categoria aberta (A1/A3)
 
 ## Limites gerais
 - **Altura máxima:** 120 m acima do ponto mais próximo da superfície da Terra
