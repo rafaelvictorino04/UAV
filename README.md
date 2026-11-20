@@ -4,6 +4,8 @@ Repositório onde registo o que vou aprendendo sobre drones, com foco nas comuni
 
 Sou aluno do Mestrado em Engenharia de Telecomunicações e Informática (Iscte), na especialização em Cibersegurança. Venho das redes (IPsec, MPLS, FortiGate, automação com n8n) e estou a aplicar essa base aos UAVs. Tenho o certificado de piloto A1/A3 (ANAC/EASA).
 
+Estou a aprender com a documentação do ArduPilot e do MAVLink e com a ajuda de ferramentas de IA (Claude), que uso para tirar dúvidas, rever código e orientar o estudo. Os exercícios, os testes no simulador e a interpretação dos resultados são feitos por mim.
+
 ## Projetos
 
 | # | Projeto | Estado |
